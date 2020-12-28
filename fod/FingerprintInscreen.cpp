@@ -50,7 +50,7 @@ static T get(const std::string& path, const T& def) {
 } // anonymous namespace
 
 namespace vendor {
-namespace mokee {
+namespace lineage {
 namespace biometrics {
 namespace fingerprint {
 namespace inscreen {
@@ -164,12 +164,8 @@ Return<bool> FingerprintInscreen::shouldBoostBrightness() {
     return false;
 }
 
-Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallback>& callback) {
-    {
-        std::lock_guard<std::mutex> _lock(mCallbackLock);
-        mCallback = callback;
-    }
-
+Return<void> FingerprintInscreen::setCallback(const sp<::vendor::lineage::biometrics::fingerprint::inscreen::V1_0::IFingerprintInscreenCallback>& callback) {
+    (void) callback;
     return Void();
 }
 
@@ -178,5 +174,5 @@ Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallb
 }  // namespace inscreen
 }  // namespace fingerprint
 }  // namespace biometrics
-}  // namespace mokee
+}  // namespace lineage
 }  // namespace vendor
