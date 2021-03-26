@@ -8,6 +8,8 @@ BOARD_VENDOR := xiaomi
 
 DEVICE_PATH := device/xiaomi/lmi
 
+TARGET_USES_PREBUILT_KERNEL := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -48,6 +50,13 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_CONFIG := vendor/lmi_user_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8250
+ifeq ($(TARGET_USES_PREBUILT_KERNEL), true)
+  TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
+  TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+  BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+  BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
+  BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+else
 
 # Platform
 TARGET_BOARD_PLATFORM := kona
